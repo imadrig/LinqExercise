@@ -21,37 +21,89 @@ namespace LinqExercise
              * 
              */
 
-            //TODO: Print the Sum of numbers
+            //TODO: Print the Sum of numbers - DONE
+            int sum = SumOfNumbers(numbers);
+            Console.WriteLine($"The sum of the numbers is: {sum}");
+
             static int SumOfNumbers(int[] numbers)
             {
                 return numbers.Sum();
             }
 
-            //TODO: Print the Average of numbers
+            //TODO: Print the Average of numbers - DONE
+            double average = AverageOfNumbers(numbers);
+            Console.WriteLine($"The average of the numbers is: {average} ");
             static double AverageOfNumbers(int[] numbers)
             {
                 return numbers.Average();
             }
 
-            //TODO: Order numbers in ascending order and print to the console
+            //TODO: Order numbers in ascending order and print to the console - DONE
+            int[] numbersAscending = OrderAscending(numbers);
+            Console.WriteLine($"The numbers in ascending order: {string.Join(", " , numbersAscending)}");
+
             static int[] OrderAscending(int[] numbers)
             {
                 int[] numbersByAscendingOrder = numbers.OrderBy(number => number).ToArray();
                 return numbersByAscendingOrder;
             }
 
-            //TODO: Order numbers in descending order and print to the console
+            //TODO: Order numbers in descending order and print to the console - DONE
+            int[] numbersDescending = OrderDescending(numbers);
+            Console.WriteLine($"The numbers in descending order: {string.Join(", ", numbersDescending)}");
 
-            //TODO: Print to the console only the numbers greater than 6
+            static int[] OrderDescending(int[] numbers)
+            {
+                int[] numbersByDescendingOrder = numbers.OrderByDescending(number => number).ToArray();
+                return numbersByDescendingOrder;
+                
+            }
 
-            //TODO: Order numbers in any order (ascending or desc) but only print 4 of them **foreach loop only!**
+            //TODO: Print to the console only the numbers greater than 6 - DONE
+            int[] numbersGreaterThan6 = NumbersGreaterThanSix(numbers);
+            Console.WriteLine($"The numbers greater than 6 are: {string.Join(", ", numbersGreaterThan6)}");
+
+            static int[] NumbersGreaterThanSix(int[] numbers)
+            {
+                int[] numbersGreaterThan6 = numbers.Where(number => number > 6).ToArray();
+                return numbersGreaterThan6;
+            }
+
+            //TODO: Order numbers in any order (ascending or desc) but only print 4 of them **foreach loop only!** - DONE
+            int[] printFourNumbers = ForeachOrderDescending(numbers);
+            
+            static int[] ForeachOrderDescending(int[] numbers)
+            {
+                int[] numbersByDescendingOrder = numbers.OrderByDescending(number => number).ToArray();
+                Console.Write("Four numbers in the array are: ");
+
+                foreach (int number in numbersByDescendingOrder.Take(4))
+                {
+                    Console.Write(number + ", ");
+                    
+                }
+                return numbersByDescendingOrder;
+
+            }
+            Console.WriteLine();
 
             //TODO: Change the value at index 4 to your age, then print the numbers in descending order
+            int[] changeValue = ChangeValueAtIndexFour(numbers);
+            Console.WriteLine($"After changing the value at index 4, the descending list is: {string.Join(", ", changeValue)}");
 
-            
+            static int[] ChangeValueAtIndexFour(int[] numbers)
+            {
+                numbers[4] = 32;
+                int[] changeValueOfIndex4 = numbers.OrderByDescending(number => number).ToArray();
+                return changeValueOfIndex4;
+            }
 
-            // List of employees ****Do not remove this****
-            var employees = CreateEmployees();
+
+
+
+
+                // List of employees ****Do not remove this****
+                var employees = CreateEmployees();
 
             //TODO: Print all the employees' FullName properties to the console only if their FirstName starts with a C OR an S and order this in ascending order by FirstName.
 
