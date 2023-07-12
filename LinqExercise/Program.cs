@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualBasic;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -21,10 +22,23 @@ namespace LinqExercise
              */
 
             //TODO: Print the Sum of numbers
+            static int SumOfNumbers(int[] numbers)
+            {
+                return numbers.Sum();
+            }
 
             //TODO: Print the Average of numbers
+            static double AverageOfNumbers(int[] numbers)
+            {
+                return numbers.Average();
+            }
 
             //TODO: Order numbers in ascending order and print to the console
+            static int[] OrderAscending(int[] numbers)
+            {
+                int[] numbersByAscendingOrder = numbers.OrderBy(number => number).ToArray();
+                return numbersByAscendingOrder;
+            }
 
             //TODO: Order numbers in descending order and print to the console
 
@@ -33,6 +47,8 @@ namespace LinqExercise
             //TODO: Order numbers in any order (ascending or desc) but only print 4 of them **foreach loop only!**
 
             //TODO: Change the value at index 4 to your age, then print the numbers in descending order
+
+            
 
             // List of employees ****Do not remove this****
             var employees = CreateEmployees();
