@@ -87,7 +87,7 @@ namespace LinqExercise
             }
             Console.WriteLine();
 
-            //TODO: Change the value at index 4 to your age, then print the numbers in descending order
+            //TODO: Change the value at index 4 to your age, then print the numbers in descending order - DONE
             int[] changeValue = ChangeValueAtIndexFour(numbers);
             Console.WriteLine($"After changing the value at index 4, the descending list is: {string.Join(", ", changeValue)}");
 
@@ -105,9 +105,29 @@ namespace LinqExercise
                 // List of employees ****Do not remove this****
                 var employees = CreateEmployees();
 
-            //TODO: Print all the employees' FullName properties to the console only if their FirstName starts with a C OR an S and order this in ascending order by FirstName.
+            //TODO: Print all the employees' FullName properties to the console only if their FirstName starts with a C OR an S and order this in ascending order by FirstName. - DONE
+            List<Employee> employeesList = EmployeesWithFirstNameCOrS(employees);
+            Console.WriteLine($"Employees with a first name that start with 'C' or 'S': " +
+                $"{string.Join(", ", employeesList.OrderBy(employee => employee.FullName).Select(employee => employee.FullName))}");
+
+            static List<Employee> EmployeesWithFirstNameCOrS(List<Employee> employees)
+            {
+                
+                List<Employee> employeesFirstLetterCOrS = employees.Where(employee => employee.FirstName.ToLower()[0] == 'c' || employee.FirstName.ToLower()[0] == 's').ToList();
+                return employeesFirstLetterCOrS;
+            }
 
             //TODO: Print all the employees' FullName and Age who are over the age 26 to the console and order this by Age first and then by FirstName in the same result.
+            List<Employee> employeesOver26 = EmployeesOverAgeTwentySix(employees);
+            Console.WriteLine($"Employees over the age of 26: " +
+                $"{string.Join(", ", employeesList.OrderBy(employee => employee.Age).ThenBy(employee => employee.FirstName).Select(employee => $"{employee.FullName} (Age: {employee.Age})"))}");
+
+            static List<Employee> EmployeesOverAgeTwentySix(List<Employee> employees)
+            {
+                List<Employee> employeesOverAge26 = employees.Where(employee => employee.Age > 26).ToList();
+                return employeesOverAge26;
+            }
+
 
             //TODO: Print the Sum and then the Average of the employees' YearsOfExperience if their YOE is less than or equal to 10 AND Age is greater than 35.
 
