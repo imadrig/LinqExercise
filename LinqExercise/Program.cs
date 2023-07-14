@@ -120,7 +120,7 @@ namespace LinqExercise
             //TODO: Print all the employees' FullName and Age who are over the age 26 to the console and order this by Age first and then by FirstName in the same result.
             List<Employee> employeesOver26 = EmployeesOverAgeTwentySix(employees);
             Console.WriteLine($"Employees over the age of 26: " +
-                $"{string.Join(", ", employeesList.OrderBy(employee => employee.Age).ThenBy(employee => employee.FirstName).Select(employee => $"{employee.FullName} (Age: {employee.Age})"))}");
+               $"{string.Join(", ", employeesOver26.OrderBy(employee => employee.Age).ThenBy(employee => employee.FirstName).Select(employee => $"{employee.FullName} - Age: {employee.Age}"))}");
 
             static List<Employee> EmployeesOverAgeTwentySix(List<Employee> employees)
             {
@@ -130,8 +130,33 @@ namespace LinqExercise
 
 
             //TODO: Print the Sum and then the Average of the employees' YearsOfExperience if their YOE is less than or equal to 10 AND Age is greater than 35.
+            List<Employee> yearsExperienceAndAgeRequirement = SumAndAverageExperience(employees);
+            Console.WriteLine($"The list includes: {string.Join(", ", yearsExperienceAndAgeRequirement.Select(employee => employee.FullName))}");
+
+            static List<Employee> SumAndAverageExperience(List<Employee> employees)
+            {
+                List<Employee> yearsExperienceAndAgeRequirement = employees.Where(employee => employee.YearsOfExperience <= 10 && employee.Age > 35).ToList();
+                int sumOfYearsExperience = yearsExperienceAndAgeRequirement.Sum(employee => employee.YearsOfExperience);
+                double avgYearsExperience = Math.Round(yearsExperienceAndAgeRequirement.Average(emloyee => emloyee.YearsOfExperience) , 2);
+
+                Console.WriteLine($"Sum of Years of Experience if employee  YOE is less than or equal to 10 AND Age is greater than 35: {sumOfYearsExperience}");
+                Console.WriteLine($"Average of Years of Experience if employee YOE is less than or equal to 10 AND Age is greater than 35: {avgYearsExperience}");
+                return yearsExperienceAndAgeRequirement;    
+            }
 
             //TODO: Add an employee to the end of the list without using employees.Add()
+            Employee newEmployee = new Employee("Harry", "Potter", 21, 7);
+            employees = AddEmployee(employees, newEmployee);
+            Console.WriteLine($"Adding a new employee at the end: " +
+                $"{string.Join(", ", employees.Select(employee => employee.FullName))}");
+
+
+            static List<Employee> AddEmployee(List<Employee> employees, Employee newEmployee)
+            {
+
+                employees.Insert(employees.Count, newEmployee);
+                return employees;
+            }
 
 
             Console.WriteLine();
